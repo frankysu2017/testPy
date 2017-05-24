@@ -5,7 +5,11 @@ import pandas
 import time
 
 with open('C:\\test\\testdate.txt', 'r+') as f:
-    arr = f.readline().split(';')
-    t3 = time.strptime(arr[3], '%d-%b-%y')
-    t4 = time.strftime('%Y-%m-%d %H:%M:%S', t3)
-    print(t4)
+    for line in f:
+        arr = line.split(';')
+        try:
+            t3 = time.strptime(arr[3], '%d-%b-%y')
+            t4 = time.strftime('%Y-%m-%d %H:%M:%S', t3)
+            print(t4)
+        except:
+            print('error encounter an invalid date: %s' %arr[3])
