@@ -9,7 +9,7 @@ from functools import reduce
 '''
 def isPwdOK(password):
     if(len(password) < 4):
-        print('太短！')
+        print('太短！要超过4位')
         return False;
     else:
         p = r'([\w ])\1{3}' #重复的数字字母或空格
@@ -39,4 +39,3 @@ str_in = input('输入密码：\n')
 while(not isPwdOK(str_in)):
     str_in = input('密码不符合规范，请重新输入：\n')
 print('这就可以了！')
-
