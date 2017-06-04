@@ -5,6 +5,7 @@ import requests
 import re
 import os
 from functools import reduce
+import multiprocessing
 
 '''
 通过URL获取JPG图片
@@ -17,19 +18,23 @@ def getimage(url):
         pathname = './pic' + url[end:setpoint - 1] + '/'
         if not os.path.isdir(pathname):
             os.mkdir(pathname)
-        with open(pathname+url[setpoint:], 'wb') as f:
+        with open(pathname+url[end:], 'wb') as f:
             f.write(imghtml.content)
         print("GOT IT %s" %url[setpoint:])
 '''
-调用getimage()函数，获取一个网页中所有的照片
+调用getimage()函数，获取一个网页中所有的照片，采用多进程同时抓取网页中所有的照片
 '''
 
 def gethtmlimage(htmlurl):
     html = requests.get(htmlurl, verify = True)
     htmltext = html.text.encode(html.encoding).decode('utf8')
     urls = re.findall(r'<img src="(https://img.+?.jpg)">', htmltext)
+    p_l = []
     for item in urls:
-        getimage(item)
+        p_l.append(multiprocessing.Process(target=getimage, args=(item,)))
+    for p in p_l:
+        p.start()
+        #getimage(item)
 
 '''
 调用gethtmlimage()函数，获取一个论坛版块中所有帖子里的图片
@@ -44,7 +49,7 @@ def getTipurls(securllist):
         setpoint = securl.index('.com/') + 4
         templist = list(map(lambda x: securl[:setpoint] + x, tipurls))
         tipurllist.extend(templist)
-        print((tipurllist))
+        #print((tipurllist))
         for item in tipurllist:
             gethtmlimage(item)
 
