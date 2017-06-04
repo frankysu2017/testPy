@@ -34,8 +34,8 @@ def isPwdOK(password):
             numOK = bool(reduce(lambda x, y: x and y, match_num))
             chacOK = bool(reduce(lambda x, y: x and y, match_chac))
             return numOK or chacOK
-
-str_in = input('输入密码：\n')
-while(not isPwdOK(str_in)):
-    str_in = input('密码不符合规范，请重新输入：\n')
-print('这就可以了！')
+if __name__ == "__main__":
+    str_in = input('输入密码：\n')
+    while(not isPwdOK(str_in)):
+        str_in = input('密码不符合规范，请重新输入：\n')
+    print('这就可以了！')
