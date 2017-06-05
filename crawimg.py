@@ -29,12 +29,15 @@ def gethtmlimage(htmlurl):
     html = requests.get(htmlurl, verify = True)
     htmltext = html.text.encode(html.encoding).decode('utf8')
     urls = re.findall(r'<img src="(https://img.+?.jpg)">', htmltext)
+    map(getimage, urls)
+    '''
     p_l = []
     for item in urls:
         p_l.append(multiprocessing.Process(target=getimage, args=(item,)))
     for p in p_l:
         p.start()
         #getimage(item)
+    '''
 
 '''
 调用gethtmlimage()函数，获取一个论坛版块中所有帖子里的图片
@@ -68,7 +71,6 @@ if __name__ == "__main__":
     print('输入正确！真TM不容易-_-#')
     sec_list = sec_input.split('|')
     sec_list = list(map(lambda x: 'https://www.hhh395.com/htm/piclist%s/' %x, sec_list))
-    #https://www.hhh395.com/htm/piclist4/
     securllist = []
     pages = list(range(1,2))  #默认每个版块抓取前十页
     for section in sec_list:
