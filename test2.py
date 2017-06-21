@@ -3,9 +3,8 @@
 
 import datetime
 import pandas as pd
+from mpl_finance import fetch_historical_yahoo
 
 if __name__ == '__main__':
-    dates = pd.date_range('20150201', periods=10)
-    listA = ['value']
-    resultA = pd.DataFrame(list(range(1, 11)), index=dates, columns=listA)
-    print(resultA.index)
+    data = fetch_historical_yahoo('600028.ss', datetime.datetime(2016,1,1), datetime.datetime(2017,1,1))
+    print(data)
