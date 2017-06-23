@@ -162,8 +162,7 @@ def getTips2(url):
 
 
 if __name__ == "__main__":
-    urls = list(map(lambda
-                        x: 'http://jzb.com/bbs/forum.php?mod=forumdisplay&fid=3220&typeid=6149&filter=typeid&typeid=6149&page=%d' % x,
+    urls = list(map(lambda x: 'http://jzb.com/bbs/forum.php?mod=forumdisplay&fid=3220&typeid=6149&filter=typeid&typeid=6149&page=%d' % x,
                     range(1, 71)))
     df_tips = pd.DataFrame()
     for url in urls:
