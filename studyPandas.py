@@ -20,7 +20,7 @@ def expand(dataframe, column, exp_column, sep = ','):
             df_exp = df_exp.append(ser1)
     return df_exp
 
-def compress(dataframe, column, comp_column, sep = ','):
+def compress(dataframe, comp_column, sep = ','):
     '''
     compress the common rows in one row, too lazy to note this function
     :param dataframe:
@@ -30,8 +30,25 @@ def compress(dataframe, column, comp_column, sep = ','):
     :return:
     '''
     df_comp = pd.DataFrame([])
-
+    for item in list(dataframe.groupby(list(dataframe.columns)[0])):
+        type = item[1]['type']
+        content = item[1]['content']
+        zipList = list(map(lambda x: x[0]+':'+x[1],list(zip(type, content))))
+        contact = ','.join(zipList)
+        df_comp = df_comp.append({'id':item[0], comp_column: contact}, ignore_index = True)
+    return df_comp
 
 if __name__ == '__main__':
     df = pd.read_csv(r'./bbb.csv', sep = ',', names = ['id', 'name', 'phonelist'], header = None, dtype=str)
-    print(list(expand(df, 'phonelist', 'phone', sep='，').groupby('id'))[1])
+    df_ex = expand(df, 'phonelist', 'phone', sep='，')
+
+    df2 = pd.read_csv(r'./ccc.csv', sep = ',', names = ['id', 'type', 'content'], header = None, dtype = str)
+    #for item in list(df2.groupby(list(df2.columns)[0])):
+    #    print('item = ', item)
+    #phones = list(list(df_ex.groupby(list(df_ex.columns)[0])['phone'])[0][1])
+    #print(list(df2.groupby(list(df2.columns)[0]))[1])
+    #content = list(list(df2.groupby(list(df2.columns)[0]))[0][1]['content'])
+    #type = list(list(df2.groupby(list(df2.columns)[0]))[0][1]['type'])
+    #res = list(map(lambda x: x[0]+':'+x[1], list(zip(type, content))))
+    #print(','.join(res))
+    print(compress(df2, 'contact'))
