@@ -21,7 +21,7 @@ def retrieve_quotes_historical(stock_code, startdate, enddate):
     return [item for item in quotes if not 'type' in item]
 
 if __name__ == '__main__':
-    quotes = retrieve_quotes_historical('INTC', '2016-1-1', '2016-12-31')
+    quotes = retrieve_quotes_historical('MSFT', '2016-1-1', '2016-12-31')
     list1 = []
     for item in quotes:
         x = date.fromtimestamp(item['date'])
@@ -31,4 +31,4 @@ if __name__ == '__main__':
     quotesdf_m = quotesdf_ori.drop(['unadjclose'], axis=1)
     quotesdf = quotesdf_m.drop(['date'], axis=1)
     u = ['open', 'low', 'high', 'close', 'volume']
-    print(quotesdf.ix[:, u].to_csv(r'./quotes_INTC.csv', sep=',', encoding='utf8', index_label='date'))
+    print(quotesdf.ix[:, u].to_csv(r'./quotes_MSFT.csv', sep=',', encoding='utf8', index_label='date'))
