@@ -37,9 +37,24 @@ def movieLens():
     udDF = pd.merge(dataDF, userDF, on='user_id', how='left')
     timeSeries = pd.Series(map(lambda x: time.strftime('%Y-%m-%d', time.localtime(x)), udDF.timestamp))
     udDF['date'] = timeSeries
-    index = (udDF.timestamp < time.mktime(time.strptime('1998-1-1', '%Y-%m-%d'))) & (udDF.timestamp > time.mktime(time.strptime('1997-6-30', '%Y-%m-%d')))
-    print(udDF[index])
-    print(udDF.groupby('gender').rating.mean())
+    #index = (udDF.timestamp < time.mktime(time.strptime('1998-1-1', '%Y-%m-%d'))) & (udDF.timestamp > time.mktime(time.strptime('1997-6-30', '%Y-%m-%d')))
+    #print(udDF[index])
+    print(udDF.groupby('gender').rating.std())
+
+def testSeek():
+    fp = open('./test.txt', 'r+')
+    fp.seek(0,1)
+    line = fp.readline()
+    print(line)
+
+def sparse_vector(indices, values):
+    vector = [indices, values]
+    print(vector)
+    ind = values.index(max(values))
+    print(indices[ind], values[ind])
+
+    return x
 
 if __name__ == '__main__':
-    MaxClose()
+    movieLens()
+    #print(sparse_vector([1,8,231,500],[0.1,2.3,2.0,10.0]))
