@@ -12,7 +12,7 @@ if __name__ == "__main__":
                                port = 3306,
                                user = 'hsiaoguo',
                                passwd = 'Qwerzxcv123',
-                               db = 'test')
+                               db = 'hsiaoguo')
         cur = conn.cursor()
 #对数据库进行操作
         QQdf = pd.read_sql("select QQacc, UNIX_TIMESTAMP(Qlog) as Qlog from qlog order by Qlog;", conn)
@@ -26,7 +26,7 @@ if __name__ == "__main__":
             arr_diff.append(QQlog_diff)
             qindex.append(QQ)
         df_diff = pd.DataFrame(arr_diff, index = qindex).T
-        df_diff.describe().to_csv('c:/工具/test.csv', encoding='utf-8')
+        df_diff.describe().to_csv('/Users/junie/Documents/twdata/test.csv', encoding='utf-8')
         df_diff.boxplot()
         plt.show()
 #关闭数据库
