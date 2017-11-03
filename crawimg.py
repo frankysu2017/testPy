@@ -4,6 +4,7 @@
 import requests
 import re
 import os
+from bs4 import BeautifulSoup as bs
 from functools import reduce
 import multiprocessing
 
