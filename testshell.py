@@ -3,6 +3,7 @@
 
 from numpy import sqrt, floor
 from functools import reduce
+import os
 
 def isPrime(num):
     if num <= 1:
@@ -15,7 +16,16 @@ def isPrime(num):
         result = reduce(lambda x, y: x&y, boollist)
         return result
 
+def fileCodec(filepath, sourceCode='utf8', destCode='utf8'):
+    for root, dirs, files in os.walk(filepath):
+        for file in files:
+            print(file)
+            f = open(filepath+'\\'+file, 'r', encoding=sourceCode)
+            content = f.read()
+            f.close()
+            f = open(filepath+"\\"+file, 'w', encoding=destCode)
+            f.write(content)
+            f.close()
+
 if __name__ == '__main__':
-    for i in range(1, 100):
-        if isPrime(i):
-            print("\t%d;" %i, end='')
+    fileCodec(r'C:\novel', destCode='gbk')

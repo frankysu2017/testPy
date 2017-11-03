@@ -13,7 +13,7 @@ def getText(url):
         soup = BeautifulSoup(html.text.encode(html.encoding).decode('utf8'), 'lxml')
         filename = './novel/' + soup.title.string.split(' - ')[0] + '.txt'
         toWrite = soup.body.find('div', class_="novelContent")
-        with open(filename, 'w', encoding='utf-8') as f:
+        with open(filename, 'w', encoding='gbk') as f:
             f.write(str(toWrite.text))
 
 def getList(url):
