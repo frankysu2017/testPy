@@ -4,6 +4,8 @@
 from numpy import sqrt, floor
 from functools import reduce
 import os
+import time
+import multiprocessing
 
 def isPrime(num):
     if num <= 1:
@@ -27,5 +29,8 @@ def fileCodec(filepath, sourceCode='utf8', destCode='utf8'):
             f.write(content)
             f.close()
 
+def prn(num):
+    print(num, end='\r')
+
 if __name__ == '__main__':
-    fileCodec(r'C:\novel', destCode='gbk')
+    print('hello, world!')
