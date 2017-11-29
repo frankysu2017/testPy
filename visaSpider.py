@@ -23,7 +23,7 @@ def getPage(url):
     header = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) Chrome/50.0.2661.102'}
     html = ''
     try:
-        html = requests.get(url, headers=header, timeout=60)
+        html = requests.get(url, headers=header, timeout=60) df
         html.raise_for_status()
         html.encoding = html.apparent_encoding
     except Exception as e:
