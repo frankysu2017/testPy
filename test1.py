@@ -26,5 +26,4 @@ def fib(max):
     return 'done'
 
 if __name__ == '__main__':
-    f = fib(100)
-    print(f)
+    print('\uD0B9\uFAB1')
