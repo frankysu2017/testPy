@@ -27,7 +27,8 @@ def loadData():
                   56, 199, 148, 198, 168, 178, 228, 199, 78, 79, 68, 95, 10, 20, 50]
     return GoodsNum, GoodsCode, GoodsName, GoodsPrice
 
-def bagCalc(account = 500,bag = [], total = 0, list = []):
+
+def bagCalc(account=500, bag=[], total=0, start=0):
     num, code, name, price = loadData()
     if account >= 10:
         for i in range(num):
@@ -35,17 +36,38 @@ def bagCalc(account = 500,bag = [], total = 0, list = []):
                 bag.append((code[i], name[i]))
                 account = account - price[i]
                 total = total + price[i]
-                bagCalc(account, bag, total, list)
+                print(bag, account)
+                bagCalc(account, bag, total, i)
             else:
                 continue
     else:
-        print(len(bag), total)
-        list.append((bag, total))
-    return list
+        start = start + 1
+        bagCalc(500,[],start)
+    return bag
 
 def queryBag():
     pass
 
+def goodsfilter(account):
+    num, code, name, price = loadData()
+    goodslist = []
+    for i in range(num):
+        if price[i] <= account:
+            goodslist.append([code[i], name[i], account - price[i]])
+    return goodslist
+
 
 if __name__ == '__main__':
-    bagCalc(500)
+    purse = 500
+    bags = goodsfilter(purse)
+    print(bags)
+    print('------------------------------------')
+    for list in goodsfilter(purse):
+        purse = list[2]
+        print(list[1], end=' + ')
+        while purse >= 10:
+            list2 = goodsfilter(purse)[0]
+            purse = list2[2]
+            name = list2[1]
+            print(name, end=' + ')
+        print('')
