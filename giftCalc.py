@@ -27,7 +27,7 @@ def loadData():
                   56, 199, 148, 198, 168, 178, 228, 199, 78, 79, 68, 95, 10, 20, 50]
     return GoodsNum, GoodsCode, GoodsName, GoodsPrice
 
-def bagCalc(account = 500,bag = [], total = 0, list = []):
+def bagCalc(account = 500):
     num, code, name, price = loadData()
     if account >= 10:
         for i in range(num):
@@ -35,11 +35,11 @@ def bagCalc(account = 500,bag = [], total = 0, list = []):
                 bag.append((code[i], name[i]))
                 account = account - price[i]
                 total = total + price[i]
-                bagCalc(account, bag, total, list)
+                bagCalc(account)
             else:
                 continue
     else:
-        print(len(bag), total)
+        print(account, len(bag), total)
         list.append((bag, total))
     return list
 
