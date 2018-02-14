@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import copy
+from math import floor
+from functools import reduce
 
-def loadData():
-    GoodsNum = 53
-    GoodsCode = [181350, 178796, 118814,120676, 207246, 206534, 131816, 16102, 86328, 175181, 41582, 92303,
+
+def loaddata():
+    goodsnum = 53
+    goodscode = [181350, 178796, 118814, 120676, 207246, 206534, 131816, 16102, 86328, 175181, 41582, 92303,
                  119580, 177007, 138863, 108479, 105121, 71349, 147559, 168826, 173608, 204050, 204051, 213000,
                  216438, 188540, 184898, 204538, 202898, 117102, 148146, 210086, 109249, 115133, 203504, 139608,
                  217079, 219350, 179019, 126714, 126718, 144100, 144101, 144102, 174318, 210158, 217450, 3855, 153836,
                  180211, 999991, 999992, 999995]
-    GoodsName = ['德清源安心生态鲜鸡蛋礼盒60枚装2580g', '正大鸡蛋60枚', '百年栗园鸡蛋60枚', '晓仙白洋淀柴鸡蛋60枚3000g',
+    goodsname = ['德清源安心生态鲜鸡蛋礼盒60枚装2580g', '正大鸡蛋60枚', '百年栗园鸡蛋60枚', '晓仙白洋淀柴鸡蛋60枚3000g',
                 '百年栗园散养柴鸡蛋48枚礼盒装2.06kg', '千禧农柴鸡蛋礼盒60枚2.75kg', '晓仙白洋淀柴鸡蛋40枚2000g',
                 '5.436鲁花花生油', '5L鲁花花生油', '鲁花压榨特香菜籽油5L', '鲁花压榨一级花生油2.5L', '5L多力葵花籽油',
                 '5L长寿花花生油', '欣奇曲有机亚麻籽油700ml', '贝蒂斯特级初榨橄榄没750ml', '多力芥花油5L',
@@ -22,14 +26,60 @@ def loadData():
                 '万佳利加州原野茗果世界精选干果礼盒2.158kg', '万佳利加州原野福贵年年礼盒2.188kg', '万佳利加州原野锦绣年华礼盒1.535kg',
                 '果园老农添香礼盒1.56kg', '芭提娅果汁礼盒1L*4', '露露杏仁露240ml', '养元六个核桃核桃乳240ml', '养元六个核桃无糖型核桃乳240ml',
                 '10元超市券', '20元超市券', '50元超市券']
-    GoodsPrice = [86, 84, 70, 59.9, 59.9, 59.9, 49.8, 149.9, 139, 85.9, 74.9, 69.9, 99, 139, 129, 82.9, 74,
+    goodsprice = [86, 84, 70, 59.9, 59.9, 59.9, 49.8, 149.9, 139, 85.9, 74.9, 69.9, 99, 139, 129, 82.9, 74,
                   95, 29.9, 29, 38, 46, 28.5, 38.9, 39, 105, 88, 36, 45, 75, 52, 36, 60, 60, 50, 49, 42, 82,
                   56, 199, 148, 198, 168, 178, 228, 199, 78, 79, 68, 95, 10, 20, 50]
-    return GoodsNum, GoodsCode, GoodsName, GoodsPrice
+    return goodsnum, goodscode, goodsname, goodsprice
+
+'''
+class Goods(object):
+    def __init__(self, code=None, name=None, price=None):
+        self.code = code
+        self.name = name
+        self.price = price
+
+
+class Node(object):
+    def __init__(self, account=0, goods=None):
+        self.account = account
+        self.goods = goods
+        self.child_list = []
+
+    def add_child(self, node):
+        self.child_list.append(node)
+
+    def add_children(self, nodelist):
+        self.child_list.extend(nodelist)
+
+    def show(self):
+        print('account:%d' %self.account, end='--')
+        if self.goods.name:
+            print('code:%d' %self.goods.code, end='--')
+            print('name:%s' %self.goods.name, end='--')
+            print('price:%d' %self.goods.price)
+        else:
+            print('have no goods in the bag yet')
+
+
+def goods_list(account):
+    num, code, name, price = loaddata()
+    account_list = []
+    for i in range(num):
+        if price[i] <= account:
+            account_list.append(Node(account=account-price[i], goods=Goods(code=code[i],name=name[i],price=price[i])))
+    return account_list
+
+
+def create_tree(node=None):
+    if node.account >= 10:       #the node's account can afford the cheapest goods at least
+        for item in goods_list(node.account):
+            node.add_child(create_tree(item))
+            #print(item.goods.name)
+        return node
 
 
 def bagCalc(account=500, bag=[], total=0, start=0):
-    num, code, name, price = loadData()
+    num, code, name, price = loaddata()
     if account >= 10:
         for i in range(num):
             if account >= price[i]:
@@ -47,27 +97,62 @@ def bagCalc(account=500, bag=[], total=0, start=0):
 
 def queryBag():
     pass
+'''
 
-def goodsfilter(account):
-    num, code, name, price = loadData()
-    goodslist = []
+def count_one(bin_list):
+    count = 0
+    for i in bin_list:
+        if i == 1:
+            count += 1
+    return count
+
+
+def count_money(bin_list):
+    num, code, name, price = loaddata()
+    ext_price = []
+    ext_code = []
+    ext_name = []
+    for i in range(num-3):
+        n = floor(500/price[i])
+        ext_price.extend([price[i]]*n)
+        ext_code.extend([code[i]]*n)
+        ext_name.extend([name[i]]*n)
+    amount_list = list(map(lambda x, y: x*y, bin_list, ext_price))
+    amount = reduce(lambda x, y: x+y, amount_list)
+    return amount
+
+
+def show_list(bin_list, file):
+    num, code, name, price = loaddata()
+    ext_price = []
+    ext_code = []
+    ext_name = []
     for i in range(num):
-        if price[i] <= account:
-            goodslist.append([code[i], name[i], account - price[i]])
-    return goodslist
+        n = floor(500/price[i])
+        ext_price.extend([price[i]]*n)
+        ext_code.extend([code[i]]*n)
+        ext_name.extend([name[i]]*n)
+
+    amount_list = list(map(lambda x, y: x*y, bin_list, ext_name))
+    lst = []
+    for item in amount_list:
+        if len(item) > 0:
+            lst.append(item)
+    print(lst, end="\t:  ", file=file)
 
 
 if __name__ == '__main__':
-    purse = 500
-    bags = goodsfilter(purse)
-    print(bags)
-    print('------------------------------------')
-    for list in goodsfilter(purse):
-        purse = list[2]
-        print(list[1], end=' + ')
-        while purse >= 10:
-            list2 = goodsfilter(purse)[0]
-            purse = list2[2]
-            name = list2[1]
-            print(name, end=' + ')
-        print('')
+    num, code, name, price = loaddata()
+    count = reduce(lambda x, y: x+y, [floor(500/i) for i in price])
+    print(count)
+    lst = []
+    f = open(r'cutline.txt', 'w')
+    for i in range(1, pow(2,361)):
+        temp = list(str(bin(i)).replace('0b', '').zfill(361))
+        temp = list(map(lambda x: int(x), temp))
+        if count_one(temp) <= 50:
+            if 450 < count_money(temp) <= 500:
+                #print('got one!')
+                show_list(temp, f)
+                print(count_money(temp), file=f)
+    f.close()

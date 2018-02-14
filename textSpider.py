@@ -20,7 +20,7 @@ def getText(url):
         with open(r'./error.txt', 'a', encoding='utf8') as f:
             f.write(url+'\n')
     soup = BeautifulSoup(html.text.encode(html.encoding).decode('utf8'), 'lxml')
-    filename = '/Users/junie/Documents/novel_c/' + soup.title.string.split(' - ')[0].replace('/', '-') + '.txt'
+    filename = r'C:/Users/WEB_PC_X1/Documents/novel_c/' + soup.title.string.split(' - ')[0].replace('/', '-') + '.txt'
     toWrite = soup.body.find('div', class_="novelContent")
     with open(filename, 'w', encoding='utf8') as f:
         f.write(str(toWrite.text).replace('　　', '\n　　'))
@@ -39,7 +39,7 @@ def getList(url):
         return novelUrl
 
 if __name__ == "__main__":
-    urls = [r'https://www.uuu669.com/htm/novellist2/'+str(x+1)+r'.htm' for x in range(229)]
+    urls = [r'https://www.814aa.com/htm/novellist5/'+str(x+1)+r'.htm' for x in range(10)]
     f = open(r'./error.txt', 'w', encoding='utf8')
     f.close()
     for i, url in enumerate(urls):
