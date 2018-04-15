@@ -96,15 +96,11 @@ def printmap():
 
 if __name__ == "__main__":
     training_examples = preprocess_features(california_housing_dataframe.head(12000))
-    print(training_examples.describe())
 
     training_targets = preprocess_targets(california_housing_dataframe.head(12000))
-    print(training_targets.describe())
 
     validation_examples = preprocess_features(california_housing_dataframe.tail(5000))
-    print(validation_examples.describe())
 
     validation_targets = preprocess_targets(california_housing_dataframe.tail(5000))
-    print(validation_targets.describe())
 
     printmap()
