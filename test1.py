@@ -26,4 +26,13 @@ def fib(max):
     return 'done'
 
 if __name__ == '__main__':
-    print('\uD0B9\uFAB1')
+    for i in range(101, 999):
+        ge = i % 10
+        shi = (i // 10) % 10
+        bai = i // 100
+        if i == ge**3 + shi**3 + bai**3:
+            print("%d = %d + %d + %d" %(i,ge**3,shi**3,bai**3))
+
+        k = 1
+        while k:
+            k+=1
