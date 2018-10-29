@@ -61,7 +61,7 @@ def studytf():
     # 训练模型
     _ = linear_regressor.train(
         input_fn=lambda: my_input_fn(my_feature, targets),
-        steps=100
+        steps=100000
     )
 
     # 评估模型
@@ -113,7 +113,7 @@ def studytf():
     y_1 = weight * x_1 + bias
 
     # Plot our regression line from (x_0, y_0) to (x_1, y_1).
-    plt.plot([x_0, x_1], [y_0, y_1], c='r')
+        plt.plot([x_0, x_1], [y_0, y_1], c='r')
 
     # Label the graph axes.
     plt.ylabel("median_house_value")
