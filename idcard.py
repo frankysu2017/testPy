@@ -58,4 +58,4 @@ def idVerify(id_str):
         return id_str + "\tinvalid"
 
 if __name__ == "__main__":
-    print(idVerify("320102660702281"))
+    print(idVerify("32010319861016002"))
