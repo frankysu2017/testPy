@@ -32,7 +32,3 @@ if __name__ == '__main__':
         bai = i // 100
         if i == ge**3 + shi**3 + bai**3:
             print("%d = %d + %d + %d" %(i,ge**3,shi**3,bai**3))
-
-        k = 1
-        while k:
-            k+=1

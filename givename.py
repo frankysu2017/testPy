@@ -110,7 +110,7 @@ def getname(numlist):
 
 
 if __name__ == "__main__":
-    '''
+
     name = input('请输入您的姓名，用|分开（如：李|天一，司马|懿）：\n')
     while '|' not in name:
         print('傻叉，名字没写对！')
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     print("外格%d: %s" % (waige, shuli81.get(waige)))
     print("总格%d: %s" % (zongge, shuli81.get(zongge)))
     print("三才:%s, %s" % (sancai, wuxing.get(sancai)))
-    '''
+
 
     '''
     for item in shui:
@@ -134,7 +134,7 @@ if __name__ == "__main__":
     16 34 31 13 46
 
     '''
-
+    '''
     jilist = [1,3,5,6,7,11,13,15,16,21,23,24,29,31,32,33,35,37,41,45,47,48,52,57,61,63,65,67,68,81]
     numlist = [[i, j] for i in range(1,40) for j in range(1,40)]
     for item in numlist:
@@ -143,5 +143,4 @@ if __name__ == "__main__":
             isji = wuxing.get('土'+shuli[renge%10]+shuli[dige%10])
             if isji == '大吉':
                 print(item, isji, tiange, renge, dige, waige, zongge)
-
-
+    '''
