@@ -32,4 +32,4 @@ def genPlot(amount, showPots=True):
     plt.show()
 
 if __name__ == "__main__":
-    genPlot(5000, False)
+    #genPlot(5000, False)

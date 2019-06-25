@@ -72,7 +72,7 @@ if __name__ == "__main__":
         sec_input = input('选择有误，请重新选择：')
     print('输入正确！真TM不容易-_-#')
     sec_list = sec_input.split('|')
-    sec_list = list(map(lambda x: 'https://www.610ii.com/htm/piclist%s/' %x, sec_list))
+    sec_list = list(map(lambda x: 'https://www.hhh310.com/htm/piclist%s/' %x, sec_list))
     securllist = []
     pages = list(range(1,6))  #默认每个版块抓取前十页
     for section in sec_list:
