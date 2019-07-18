@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 if __name__ == '__main__':
+    '''
     rest = -1
     while rest < 0:
         a = 0
@@ -15,3 +16,9 @@ if __name__ == '__main__':
             print('剩余%d元' %rest)
         else:
             print('预算超支，重新输入\n')
+    '''
+    fnew = open(r'c:\19.txt', 'w')
+    with open(r'c:\18.txt', 'r') as f:
+        for line in f:
+            fnew.write(line.replace(':', ';'))
+    fnew.close()
