@@ -17,4 +17,6 @@ if __name__ == '__main__':
     print(type(client.execute('SELECT * FROM test')))
     print(client.execute('SELECT * FROM test'))
     '''
-    client.execute('INSERT INTO linkedin', r'c:\19.txt')
+    print(client.execute('SHOW DATABASES'))
+    print(client.execute('SHOW TABLES'))
+    #client.execute('INSERT INTO linkedin', r'c:\19.txt')

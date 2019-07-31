@@ -22,9 +22,9 @@ clickhouse-client --password --format_csv_delimiter="[delimiter charactor]" --qu
 五、用clickhouse_driver在python下调用
 安装clickhouse驱动模块：pip install clickhouse-driver
 创建表对象：client = Client(
-                                          host='localhost',                       #数据库服务器IP地址
-                                          user='default',                          #数据库用户名
-                                          database='default'                   #数据仓库名称
-                                          password='Qwerzxcv123'         #用户密码
-                                          )
+                          host='localhost',               #数据库服务器IP地址
+                          user='default',                 #数据库用户名
+                          database='default'              #数据仓库名称
+                          password='Qwerzxcv123'          #用户密码
+                         ？)
 执行SQL命令：client.excute('[SQL命令行]')
