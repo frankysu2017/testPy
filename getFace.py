@@ -33,9 +33,9 @@ def CatchPICFromVideo(window_name, camera_idx, catch_pic_num, path_name):
                 x, y, w, h = faceRect
 
                 # 将当前帧保存为图片
-                img_name = "%s/%d.jpg" % (path_name, num)
+                img_name = "%s/%s_%d.jpg" % (path_name, camera_idx.split(".")[-2], num)
                 # print(img_name)
-                image = frame[y - 10: y + h + 10, x - 10: x + w + 10]
+                image = frame[y - 50: y + h + 50, x - 50: x + w + 50]
                 cv2.imwrite(img_name, image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
 
                 num += 1
@@ -65,4 +65,10 @@ def CatchPICFromVideo(window_name, camera_idx, catch_pic_num, path_name):
 
 if __name__ == '__main__':
     # 连续截100张图像
-    CatchPICFromVideo("get face", r"./A.mp4", 100, "./VideoCapture")
+    CatchPICFromVideo("get face", r"./A1.mp4", 1000, "./VideoCapture")
+    '''
+    l = os.listdir(r"c:/hk/mp4/")
+    for file in l:
+        print("正在识别文件%s" %file)
+        CatchPICFromVideo("get face", file, 1000, "C:/hk/VideoCapture")
+    '''

@@ -1,0 +1,30 @@
+Clickhouse列式数据库在引擎使用Memory模式时，效率很高，但是重启服务所有库中数据将丢失，适合作为临时数据分析的数据分析表使用。
+
+一、安装WSL
+在Microsoft Store中选择ubuntu 18.04 LTS版本进行安装
+
+二、更新WSL的apt-get列表并安装clickhouse
+安装GPG密钥：sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
+添加Yandex库列表：echo "deb http://repo.yandex.ru/clickhouse/deb/stable/ main/" | sudo tee /etc/apt/sources.list.d/clickhouse.list
+更新apt包：sudo apt-get update
+使用apt-get安装clickhouse：sudo apt-get install -y clickhouse-server clickhouse-client
+在安装的最后，clickhouse会要求用户输入数据库default用户的密码，输入，然后记住密码。
+
+三、启动clickhouse并导入数据
+启动clickhouse：sudo service clickhouse-server start
+进入命令行客户端：clickhouse-client --password（输入后会提示输入密码，输入刚刚设置的密码即进入default用户界面）
+操作数据库：进行命令行客户端，即可以使用SQL命令操作数据库
+
+四、导入数据
+在WSL命令行模式下，输入以下命令，可以从文件中导入数据
+clickhouse-client --password --format_csv_delimiter="[delimiter charactor]" --query="insert into linkedin FORMAT [CSV/TSV/CSVWithNames]" < [filepath/filename]
+
+五、用clickhouse_driver在python下调用
+安装clickhouse驱动模块：pip install clickhouse-driver
+创建表对象：client = Client(
+                          host='localhost',               #数据库服务器IP地址
+                          user='default',                 #数据库用户名
+                          database='default'              #数据仓库名称
+                          password='Qwerzxcv123'          #用户密码
+                         ？)
+执行SQL命令：client.excute('[SQL命令行]')
