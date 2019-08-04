@@ -172,3 +172,4 @@ if __name__ == "__main__":
     engine = create_engine('mysql+pymysql://%s:%s@%s/%s' % ('hsiaoguo', 'Qwerzxcv123', 'localhost', 'hsiaoguo'),
                            connect_args={'charset': 'utf8'})
     df_tips.to_sql('jzb', con = engine, if_exists = 'append', index = False)
+
