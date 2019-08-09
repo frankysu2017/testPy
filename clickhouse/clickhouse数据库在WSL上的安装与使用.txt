@@ -17,7 +17,7 @@ Clickhouse列式数据库在引擎使用Memory模式时，效率很高，但是�
 
 四、导入数据
 在WSL命令行模式下，输入以下命令，可以从文件中导入数据
-clickhouse-client --password --format_csv_delimiter="[delimiter charactor]" --query="insert into linkedin FORMAT [CSV/TSV/CSVWithNames]" < [filepath/filename]
+clickhouse-client --password --format_csv_delimiter="[delimiter charactor]" --query="insert into [tablename] FORMAT [CSV/TSV/CSVWithNames]" < [filepath/filename]
 
 五、用clickhouse_driver在python下调用
 安装clickhouse驱动模块：pip install clickhouse-driver
@@ -26,5 +26,10 @@ clickhouse-client --password --format_csv_delimiter="[delimiter charactor]" --qu
                           user='default',                 #数据库用户名
                           database='default'              #数据仓库名称
                           password='Qwerzxcv123'          #用户密码
-                         ？)
+                         )
 执行SQL命令：client.excute('[SQL命令行]')
+
+六、解决导入数据时发生内存超出范围：Memory limit (for query) exceeded
+修改/etc/clickhouse-server/users.xml文件：sudo vi /etc/clickhouse-server/users.xml
+找到<max_memory_usage>10000000000</max_memory_usage>（约9.3GB），可以根据实际硬件内存数量和数据规模进行调整
+例如，修改为<max_memory_usage>100000000000</max_memory_usage>（约93GB）

@@ -5,6 +5,7 @@ from functools import reduce
 import time
 import datetime
 
+
 def is_valid_date(date_str):
     if len(date_str) == 8:
         try:
@@ -19,31 +20,34 @@ def is_valid_date(date_str):
         except:
             return False
     else:
-        return  False
+        return False
+
 
 def idVerify(id_str):
     weight = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
     validate = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2']
     id = list(id_str)
+    if not id_str[:17].isdigit():
+        return id_str, False
 
     if len(id_str) == 17:
         if is_valid_date(id_str[6:14]):
             multi_weight = list(map(lambda x, y: x*int(y), weight, id))
             validate_serial = reduce(lambda x, y: x+y, multi_weight) % 11
-            return id_str + validate[validate_serial]
+            return id_str+validate[validate_serial], True
         else:
-            return id_str + "\tinvalid"
+            return id_str, False
 
     elif len(id_str) == 18:
         if is_valid_date(id_str[6:14]):
             multi_weight = list(map(lambda x, y: x * int(y), weight, id[:-1]))
             validate_serial = reduce(lambda x, y: x + y, multi_weight) % 11
             if validate[validate_serial] == id[-1]:
-                return id_str+"\tvalid"
+                return id_str, True
             else:
-                return id_str + "\tinvalid"
+                return id_str, False
         else:
-            return id_str + "\tinvalid"
+            return id_str, False
 
     elif len(id_str) == 15:
         if is_valid_date(id_str[6:12]):
@@ -53,9 +57,10 @@ def idVerify(id_str):
                 id_str = id_str[:6] + '19' + id_str[6:]
             return idVerify(id_str)
         else:
-            return id_str + "\tinvalid"
+            return id_str, False
     else:
-        return id_str + "\tinvalid"
+        return id_str, False
+
 
 if __name__ == "__main__":
-    print(idVerify("32010319861016002"))
+    print("32010319810620207X"[:17])
