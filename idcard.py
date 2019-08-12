@@ -63,4 +63,4 @@ def idVerify(id_str):
 
 
 if __name__ == "__main__":
-    print("32010319810620207X"[:17])
+    print(idVerify("420102198206181298"))
