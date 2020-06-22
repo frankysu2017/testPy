@@ -84,10 +84,10 @@ def precess_data(str):
 
 
 if __name__ == '__main__':
-    path = r'C:/如家数据/'
-    result = open(r'./result.csv', 'w', encoding='utf8')
-    error = open(r'./error.csv', 'w', encoding='utf8')
-    doubt = open(r'./doubt.csv', 'w', encoding='utf8')
+    path = r'C:\Users\junie\PycharmProjects\testPy\hotel\1\\'
+    result = open(r'./result.csv', 'w', encoding='utf8')    #合并结果
+    error = open(r'./error.csv', 'w', encoding='utf8')      #数据错误
+    doubt = open(r'./doubt.csv', 'w', encoding='utf8')      #证件号未通过验证
     column = 'Name,CardNo,Descriot,CtfTp,CtfId,Gender,Birthday,Address,' \
              'Zip,Dirty,District1,District2,District3,District4,District5,' \
              'District6,FirstNm,LastNm,Duty,Mobile,Tel,Fax,EMail,Nation,Taste,' \
@@ -115,7 +115,3 @@ if __name__ == '__main__':
     result.close()
     error.close()
     doubt.close()
-    '''
-    str = '曹晓龙,,,ID,效30103197401250518,M,19740125,-,-,,,CHN,-1,-1,,,,,,13308455170,-,-,caoxiaolong8888@126.com,,,,,,,,,,12452'
-    print('效30103197401250518'[:-2])
-    '''
