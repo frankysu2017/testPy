@@ -151,5 +151,3 @@ if __name__ == '__main__':
     lst = os.listdir(r'C:\Download\email/')
     l2 = map(lambda x: r'C:\Download\email/{}'.format(x), lst)
     pool.map(email_init, l2)
-    #for i, item in enumerate(os.listdir(r'C:\Download\email/')):
-    #    r = email_init(r'C:\Download\email/{}'.format(item))
